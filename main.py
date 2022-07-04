@@ -25,7 +25,7 @@ pygame.display.set_caption('Tetris')
 def move_objects(active_objects):
   for object in active_objects:
     object.move(0, BOX_HEIGHT, BORDER)    
-    if object.collides_with_multiple_squares(active_objects):
+    if object.collides_with_multiple_tokens(active_objects):
       object.move(0, -BOX_HEIGHT, BORDER)
       object.set_movable(False)
 
@@ -54,7 +54,7 @@ def spawn_square(active_objects):
     x = random.randrange(0, WIDTH-nr_boxes_width*BOX_WIDTH, nr_boxes_width*BOX_WIDTH)
     y = 0
     square = Square(x,y, nr_boxes_height*BOX_HEIGHT, nr_boxes_width*BOX_WIDTH)
-    if not square.collides_with_multiple_squares(active_objects):
+    if not square.collides_with_multiple_tokens(active_objects):
       found=True
   return square
 

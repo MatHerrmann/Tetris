@@ -28,21 +28,8 @@ class Square(Token):
       if self.x + self.width + vx < BORDER.width and self.y + self.height < BORDER.height:
         super().move_after_check(vx, vy)
 
-  def collides_with_single_square(self, other_square):
-    collision_detected=False
-    if self != other_square:
-      for me_part_rect in self.rects:
-        for other_part_rect in other_square.rects:
-          if me_part_rect.colliderect(other_part_rect):
-            collision_detected=True
-            break
-    return collision_detected
 
-  def collides_with_multiple_squares(self, other_squares):
-    for other_square in other_squares:
-      if self.collides_with_single_square(other_square=other_square):
-        return True
-
+  
 
 
 

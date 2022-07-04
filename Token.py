@@ -28,6 +28,21 @@ class Token():
       part_rect.x += vx
       part_rect.y += vy
 
+  def collides_with_single_token(self, other_token):
+    collision_detected=False
+    if self != other_token:
+      for me_part_rect in self.rects:
+        for other_part_rect in other_token.rects:
+          if me_part_rect.colliderect(other_part_rect):
+            collision_detected=True
+            break
+    return collision_detected
+
+  def collides_with_multiple_tokens(self, other_tokens):
+    for other_token in other_tokens:
+      if self.collides_with_single_token(other_token):
+        return True
+
 
   
 
