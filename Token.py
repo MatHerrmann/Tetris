@@ -1,5 +1,6 @@
-import color_constants
 import pygame
+from abc import abstractmethod
+import color_constants
 
 class Token():
   def __init__(self,x,y,width, height) -> None:
@@ -42,7 +43,20 @@ class Token():
     for other_token in other_tokens:
       if self.collides_with_single_token(other_token):
         return True
+        
+  def is_out_of_screen(self, BORDER):
+    if self.x + self.width> BORDER.width or self.x < 0 or self.y + self.height > BORDER.height or self.y < 0:
+      return True
+    else:
+      return False
 
+  @abstractmethod
+  def rotate(self):
+    pass
+
+  @abstractmethod
+  def move(self, vx, vy):
+    pass
 
   
 

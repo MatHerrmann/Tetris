@@ -12,7 +12,7 @@ class Square(Token):
   
   def __init__(self, x,y, width, height) -> None:
     super().__init__(x,y,width,height)
-    self.color=color_constants.BLUE2
+    self.color=color_constants.CYAN2
 
     # Add a better handle for the single rect which represents this class
     # This is easier than using self.rects[0] all the time
@@ -22,11 +22,11 @@ class Square(Token):
   def rotate(self, degree):
     pass
 
+  
 
-  def move(self, vx, vy, BORDER):
+  def move(self, vx, vy):
     if self.is_movable():
-      if self.x + self.width + vx < BORDER.width and self.y + self.height < BORDER.height:
-        super().move_after_check(vx, vy)
+      super().move_after_check(vx, vy)
 
 
   

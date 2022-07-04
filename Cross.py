@@ -26,7 +26,8 @@ class Cross(Token):
     pass
 
 
-  def move(self, vx, vy, BORDER):
+  def move(self, vx, vy):
     if self.is_movable():
-      if self.x + self.width + vx < BORDER.width and self.y + self.height < BORDER.height:
-        super().move_after_check(vx, vy)
+      super().move_after_check(vx, vy)
+
+  
