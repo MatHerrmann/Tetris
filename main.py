@@ -1,8 +1,8 @@
 import pygame
 import random
-import time
 import color_constants
 from Square import *
+from Cross import *
 
 WIDTH, HEIGHT = 500,800
 BOX_WIDTH, BOX_HEIGHT = 50,50
@@ -13,14 +13,6 @@ TICK_EVENT = pygame.USEREVENT + 1
 
 
 pygame.display.set_caption('Tetris')
-
-# def move_rectangles(active_objects):
-#   out_of_screen_rectangles=list()
-#   for object in active_objects:
-#     object.y += BOX_HEIGHT
-#     if object.y >= HEIGHT:
-#       out_of_screen_rectangles.append(object)
-#   return out_of_screen_rectangles
 
 def move_objects(active_objects):
   for object in active_objects:
@@ -58,6 +50,17 @@ def spawn_square(active_objects):
       found=True
   return square
 
+def spawn_cross(active_objects):
+  nr_boxes_width, nr_boxes_height=3,3
+  found=False
+  while not found:
+    x = random.randrange(0, WIDTH-nr_boxes_width*BOX_WIDTH, nr_boxes_width*BOX_WIDTH)
+    y = 0
+    cross = Cross(x,y, nr_boxes_height*BOX_HEIGHT, nr_boxes_width*BOX_WIDTH)
+    if not cross.collides_with_multiple_tokens(active_objects):
+      found=True
+  return cross
+
 def main():
   clock = pygame.time.Clock()
   pygame.time.set_timer(TICK_EVENT, 1000)
@@ -77,7 +80,7 @@ def main():
         move_objects(active_objects)
         if tick_counter % spawn_frequency:
           if len(active_objects) < test_spawn_objects:
-            new_square=spawn_square(active_objects)
+            new_square=spawn_cross(active_objects)
             active_objects.append(new_square)
     
     draw_window(active_objects)
